@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Filter() {
   return (
     <select className="p-2 rounded-md">
