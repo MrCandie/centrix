@@ -128,3 +128,9 @@
   transform: none;
   background: whitesmoke;
 }
+
+@media screen and (max-width: 800px) {
+  .centered {
+    width: 90%;
+  }
+}
