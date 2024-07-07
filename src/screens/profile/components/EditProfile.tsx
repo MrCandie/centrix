@@ -3,6 +3,7 @@ import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import { Personal, User } from "../../../userType";
 import { toast } from "react-toastify";
+import validator from "validator";
 
 export default function EditProfile({
   setOpen,
@@ -29,16 +30,19 @@ export default function EditProfile({
 
   function saveHandler() {
     if (
-      !formData.firstName ||
-      !formData.lastName ||
-      !formData.email ||
-      !formData.phoneNumber ||
-      !formData.address ||
-      !formData.occupation
+      validator.isEmpty(formData.firstName) ||
+      validator.isEmpty(formData.lastName) ||
+      validator.isEmpty(formData.email) ||
+      validator.isEmpty(formData.phoneNumber) ||
+      validator.isEmpty(formData.address) ||
+      validator.isEmpty(formData.occupation)
     )
       return toast.warn(
         "First name, last name, email, phone number, address and occupation are REQUIRED"
       );
+
+    if (!validator.isEmail(formData.email))
+      return toast.warning("Enter a valid email address");
 
     setData({
       ...data,

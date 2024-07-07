@@ -12,7 +12,9 @@ const Modal = ({
   return (
     <>
       <div className="darkBG" onClick={() => setIsOpen(false)} />
-      <div className={styles.centered}>{children}</div>
+      <div className="w-full flex items-center justify-center h-screen absolute top-0 left-0">
+        <div className={styles.centered}>{children}</div>
+      </div>
     </>
   );
 };
