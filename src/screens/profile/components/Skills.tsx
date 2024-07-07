@@ -39,9 +39,7 @@ export default function Skills({
 function Skill({ item }: { item: string }) {
   return (
     <div className="border border-[#5eadec] rounded-lg shadow-lg p-1">
-      <p className="text-[13px] capitalize text-[#333] font-[300]">
-        Javascript
-      </p>
+      <p className="text-[13px] capitalize text-[#333] font-[300]">{item}</p>
     </div>
   );
 }
