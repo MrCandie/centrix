@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../../components/Input";
 import EditProfile from "./EditProfile";
-import { User } from "../../../userType";
+import { Personal, User } from "../../../userType";
 
 export default function PersonalInfo({
   setData,
@@ -12,6 +12,20 @@ export default function PersonalInfo({
 }) {
   const [open, setOpen] = useState(false);
   const { personalInformation } = data;
+
+  const [formData, setFormData] = useState<Personal>({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    occupation: "",
+    address: "",
+  });
+
+  useEffect(() => {
+    setFormData(personalInformation);
+  }, [personalInformation]);
+
   return (
     <>
       {open && <EditProfile data={data} setData={setData} setOpen={setOpen} />}
@@ -32,13 +46,13 @@ export default function PersonalInfo({
             onChange={() => {}}
             label="First Name"
             placeholder="First name"
-            value={personalInformation.firstName}
+            value={formData.firstName}
           />
           <Input
             onChange={() => {}}
             label="Last Name"
             placeholder="Last name"
-            value={personalInformation.lastName}
+            value={formData.lastName}
           />
         </div>
 
@@ -47,13 +61,13 @@ export default function PersonalInfo({
             onChange={() => {}}
             label="Email Address"
             placeholder="Email Address"
-            value={personalInformation.email}
+            value={formData.email}
           />
           <Input
             onChange={() => {}}
             label="Phone Number"
             placeholder="Phone Number"
-            value={personalInformation.phoneNumber}
+            value={formData.phoneNumber}
           />
         </div>
 
@@ -62,13 +76,13 @@ export default function PersonalInfo({
             onChange={() => {}}
             label="Address"
             placeholder="Address"
-            value={personalInformation.address}
+            value={formData.address}
           />
           <Input
             onChange={() => {}}
             label="Occupation"
             placeholder="Occupation"
-            value={personalInformation.occupation}
+            value={formData.occupation}
           />
         </div>
       </div>

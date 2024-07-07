@@ -11,7 +11,7 @@ const Modal = ({
 }) => {
   return (
     <>
-      <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
+      <div className="darkBG" onClick={() => setIsOpen(false)} />
       <div className={styles.centered}>{children}</div>
     </>
   );

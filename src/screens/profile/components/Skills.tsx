@@ -27,9 +27,17 @@ export default function Skills({
           </div>
         </div>
         <div className="w-full lg:w-[50%] p-4 flex items-center justify-center flex-wrap gap-4 bg-white rounded-md shadow-md">
-          {skills?.map((el: string, i) => (
-            <Skill item={el} key={i} />
-          ))}
+          {skills?.length > 0 ? (
+            <>
+              {skills?.map((el: string, i) => (
+                <Skill item={el} key={i} />
+              ))}
+            </>
+          ) : (
+            <h1 className="py-6 text-base font-medium">
+              You currently have no skills
+            </h1>
+          )}
         </div>
       </div>
     </>

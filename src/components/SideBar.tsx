@@ -19,11 +19,13 @@ export default function SideBar() {
       </div>
       <div className="w-full flex flex-col items-start">
         <MenuItem to="/" title="Dashboard" icon={<MdDashboard />} />
-        <MenuItem
-          to="/consultants"
-          title="Consultants"
-          icon={<MdDashboard />}
-        />
+        {false && (
+          <MenuItem
+            to="/consultants"
+            title="Consultants"
+            icon={<MdDashboard />}
+          />
+        )}
         <MenuItem to="/profile" title="Profile" icon={<FaUser />} />
       </div>
       <div className="absolute w-full py-3 px-6 cursor-pointer bg-[#fafafa] bottom-0 left-0 flex items-center gap-4">

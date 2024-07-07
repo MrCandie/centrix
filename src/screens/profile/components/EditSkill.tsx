@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import { User } from "../../../userType";
+import { toast } from "react-toastify";
 
 export default function EditSkill({
   setOpen,
@@ -16,20 +17,21 @@ export default function EditSkill({
   const [skills, setSkills] = useState<Array<string>>([]);
 
   function addHandler() {
-    if (!value) return;
+    if (!value) return toast.warning("Kindly enter a valid skill");
 
     setSkills((prev) => [value, ...prev]);
     setValue("");
   }
 
   function saveHandler() {
-    if (skills.length === 0) return;
+    if (skills.length === 0) return toast.warning("Kindly enter a valid skill");
 
     setData({
       ...data,
       skills: [...skills, ...data.skills],
     });
     setOpen(false);
+    toast.success("Skill updated");
   }
 
   return (
@@ -64,6 +66,7 @@ export default function EditSkill({
             Close
           </button>
           <button
+            disabled={skills.length === 0}
             onClick={saveHandler}
             className="bg-[#a81aff] py-1 w-full text-[13px] font-bold text-white hober:opacity-80 shadow-md hover:shadow-xl rounded-md">
             Save

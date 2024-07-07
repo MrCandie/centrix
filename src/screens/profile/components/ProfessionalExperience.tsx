@@ -44,15 +44,25 @@ export default function ProfessionalExperience({
             <FaPlus color="#fff" />
           </div>
         </div>
-        {professionalExperience?.map((el: Experience, i: number) => (
-          <ExperienceComponent
-            index={i}
-            data={data}
-            setData={setData}
-            item={el}
-            key={i}
-          />
-        ))}
+        {professionalExperience?.length > 0 ? (
+          <>
+            {professionalExperience?.map((el: Experience, i: number) => (
+              <ExperienceComponent
+                index={i}
+                data={data}
+                setData={setData}
+                item={el}
+                key={i}
+              />
+            ))}
+          </>
+        ) : (
+          <div className="w-full lg:w-[50%] p-4 flex items-center justify-center flex-wrap gap-4 bg-white rounded-md shadow-md">
+            <h1 className="py-6 text-base font-medium">
+              You currently have no experience added
+            </h1>
+          </div>
+        )}
       </div>
     </>
   );

@@ -1,7 +1,8 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import { Personal, User } from "../../../userType";
+import { toast } from "react-toastify";
 
 export default function EditProfile({
   setOpen,
@@ -12,6 +13,7 @@ export default function EditProfile({
   setData: (e: User) => void;
   data: User;
 }) {
+  const { personalInformation } = data;
   const [formData, setFormData] = useState<Personal>({
     firstName: "",
     lastName: "",
@@ -20,6 +22,10 @@ export default function EditProfile({
     address: "",
     occupation: "",
   });
+
+  useEffect(() => {
+    setFormData(personalInformation);
+  }, [personalInformation]);
 
   function saveHandler() {
     if (
@@ -30,12 +36,15 @@ export default function EditProfile({
       !formData.address ||
       !formData.occupation
     )
-      return;
+      return toast.warn(
+        "First name, last name, email, phone number, address and occupation are REQUIRED"
+      );
 
     setData({
       ...data,
       personalInformation: formData,
     });
+    toast.success("Personal information updated!");
     setOpen(false);
   }
 

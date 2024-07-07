@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import Input from "../../../components/Input";
 import Modal from "../../../components/Modal";
 import { Experience, User } from "../../../userType";
+import { toast } from "react-toastify";
 
 export default function EditExperience({
   setOpen,
@@ -12,6 +13,7 @@ export default function EditExperience({
   setData: (e: User) => void;
   data: User;
 }) {
+  const [checked, setChecked] = useState(false);
   const [formData, setFormData] = useState<Experience>({
     company: "",
     location: "",
@@ -29,13 +31,16 @@ export default function EditExperience({
       !formData.startDate ||
       !formData.title
     )
-      return;
+      return toast.warning(
+        "Company name, location, start date and job title is REQUIRED"
+      );
 
     setData({
       ...data,
       professionalExperience: [formData, ...data.professionalExperience],
     });
     setOpen(false);
+    toast.success("Experience updated");
   }
 
   return (
@@ -79,24 +84,30 @@ export default function EditExperience({
         />
         <div className="w-full flex items-center gap-2">
           <input
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setChecked(e.target.checked)
+            }
+            value={checked ? "" : undefined}
             id="input"
             type="checkbox"
-            className="p-2  rounded-md outline-none border border-b-[1px] border-b-[#a81aff]"
+            className="p-2 rounded-md outline-none border border-b-[1px] border-b-[#a81aff]"
             placeholder="Enter a brief description of your role here"
           />
           <label className="" htmlFor="input">
             Till Present
           </label>
         </div>
-        <Input
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setFormData({ ...formData, endDate: e.target.value })
-          }
-          value={formData.endDate}
-          label="End Date"
-          placeholder="Enter End Date"
-          type="date"
-        />
+        {!checked && (
+          <Input
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setFormData({ ...formData, endDate: e.target.value })
+            }
+            value={formData.endDate}
+            label="End Date"
+            placeholder="Enter End Date"
+            type="date"
+          />
+        )}
         <div className="w-full flex items-start flex-col gap-2">
           <label className="" htmlFor="input">
             Description
