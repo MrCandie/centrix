@@ -8,6 +8,7 @@ import { lazy, Suspense } from "react";
 import Spinner from "./components/Spinner";
 
 const Dashboard = lazy(() => import("./screens/dashboard/Dashboard"));
+const Profile = lazy(() => import("./screens/profile/Profile"));
 
 import "./App.css";
 
@@ -21,6 +22,14 @@ const router = createBrowserRouter(
           </Suspense>
         }
         index
+      />
+      <Route
+        element={
+          <Suspense fallback={<Spinner />}>
+            <Profile />
+          </Suspense>
+        }
+        path="/profile"
       />
     </Route>
   )
